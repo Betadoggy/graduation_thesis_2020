@@ -9,12 +9,14 @@ import re
 INPUT_FILE_NAME = 'output.txt'
 OUTPUT_FILE_NAME = 'output_prp.txt'
 
+
 # 텍스트 전처리(Preprocess text 함수)
 def prp_text(text):
     prped_text = re.sub('[a-zA-Z]', '', text) # 영어
     prped_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]', '', prped_text) # 특수문자
 
     return prped_text
+
 
 # 메인 함수
 def main():
@@ -25,6 +27,7 @@ def main():
     write_file.write(text)
     read_file.close()
     write_file.close()
+
 
 # 인터프리터에서 직접 실행할 경우
 if __name__ == "__main__":

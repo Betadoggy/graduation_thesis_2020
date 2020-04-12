@@ -21,8 +21,9 @@ def get_tags(text, ntags=50):
     # 큰 명사부터 순서대로 입력받은 정수 갯수만큼 저장되어있는 객체 반환
     # 명사와 사용된 갯수를 return_list에 저장합니다.
     return return_list
- 
- 
+
+
+# 메인 함수
 def main():
     text_file_name = "output_prp.txt"
     # 분석할 파일
@@ -43,7 +44,8 @@ def main():
         open_output_file.write('{} {}\n'.format(noun, count))
     # 결과 저장
     open_output_file.close() 
- 
+
+
 # 인터프리터에서 직접 실행
 if __name__ == '__main__':
     main()
