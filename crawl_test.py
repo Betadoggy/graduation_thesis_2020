@@ -5,6 +5,7 @@ import urllib.request
 
 # 출력 파일명
 OUTPUT_FILE_NAME = 'output.txt'
+
 # 긁어 올 URL
 URL = 'https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=104&oid=032&aid=0003000669'
 
