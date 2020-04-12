@@ -1,0 +1,23 @@
+2차교육과정 중등국사	 //*[@id="container"]/div/div[2]/div/div[5]/ul/li[3]/a	 full : /html/body/div[1]/div[6]/div/div[2]/div/div[5]/ul/li[3]/a
+2차교육과정 고등국사	 //*[@id="container"]/div/div[2]/div/div[5]/ul/li[4]/a
+
+3차교육과정 중학국사	 //*[@id="container"]/div/div[2]/div/div[6]/ul/li[3]/a
+
+
+3차교육과정 고등국사	 //*[@id="container"]/div/div[2]/div/div[6]/ul/li[4]/a
+3차교육과정 고등세계사 	 //*[@id="container"]/div/div[2]/div/div[6]/ul/li[5]/a
+
+4차교육과정 고등국사	 //*[@id="container"]/div/div[2]/div/div[7]/ul/li[4]/a
+
+5차교육과정 고등국사 	 //*[@id="container"]/div/div[2]/div/div[8]/ul/li[4]/a
+
+6차교육과정 고등국사 	 //*[@id="container"]/div/div[2]/div/div[9]/ul/li[4]/a
+
+IV. 근대 사회		 //*[@id="container"]/div[1]/div[2]/div[2]/section/div/ul/li[7]/a
+
+1. 일본의 침략 정치 	 //*[@id="container"]/div[1]/div[2]/div[2]/section/div/ul/li[1]/a
+2. 민족의 독립 투쟁 	 //*[@id="container"]/div[1]/div[2]/div[2]/section/div/ul/li[2]/a
+3. 민족의 피어린 문화 운동	 //*[@id="container"]/div[1]/div[2]/div[2]/section/div/ul/li[3]/a
+4. 대한 민국의 수립과 시련 	 //*[@id="container"]/div[1]/div[2]/div[2]/section/div/ul/li[4]/a
+5. 혁명과 발전 		 //*[@id="container"]/div[1]/div[2]/div[2]/section/div/ul/li[5]/a
+6. 우리의 사명		 //*[@id="container"]/div[1]/div[2]/div[2]/section/div/ul/li[6]/a
