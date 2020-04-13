@@ -6,4 +6,5 @@ graduation thesis 2020, CAU, department of history, Moon Gyuseong
 python, beatiful soup, selenium 이용
 
 source : http://contents.history.go.kr/front/ta/main.do
+
 reference : https://l0o02.github.io/2018/06/09/python-crawling-1_copy0/

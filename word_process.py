@@ -2,9 +2,25 @@
 단어 통계처리 
 """
 
+import os
 from konlpy.tag import Twitter
 from collections import Counter
  
+# 크롤링한 파일을 저장할  폴더 만들기
+if not(os.path.isdir('stats')):
+	os.mkdir('stats')
+
+
+# 특정 파일 내 txt파일 리스트
+path = "processed"
+file_list = os.listdir(path)
+file_list_txt = [file for file in file_list if file.endswith(".txt")]
+
+
+# 입출력 파일명
+INPUT_FILE_NAME = 'processed/'
+OUTPUT_FILE_NAME = 'stats/'
+
 
 def get_tags(text, ntags=50):
     spliter = Twitter()
@@ -25,25 +41,21 @@ def get_tags(text, ntags=50):
 
 # 메인 함수
 def main():
-    text_file_name = "output_prp.txt"
-    # 분석할 파일
-    noun_count = 20
+
     # 최대 많은 빈도수 부터 20개 명사 추출
-    output_file_name = "count.txt"
-    # count.txt 에 저장
-    open_text_file = open(text_file_name, 'r',-1,"utf-8")
-    # 분석할 파일을 open 
-    text = open_text_file.read() #파일을 읽습니다.
-    tags = get_tags(text, noun_count) # get_tags 함수 실행
-    open_text_file.close()   #파일 close
-    open_output_file = open(output_file_name, 'w',-1,"utf-8")
-    # 결과로 쓰일 count.txt 열기
-    for tag in tags:
-        noun = tag['tag']
-        count = tag['count']
-        open_output_file.write('{} {}\n'.format(noun, count))
-    # 결과 저장
-    open_output_file.close() 
+    noun_count = 20
+
+    # print ("file_list_txt: {}".format(file_list_txt))
+
+    for file in file_list_txt:
+        with open(INPUT_FILE_NAME + file, 'r', encoding = 'UTF-8') as read_file: # UTF-8 인코딩
+            text = read_file.read() #파일을 읽습니다.
+            tags = get_tags(text, noun_count) # get_tags 함수 실행
+            with open(OUTPUT_FILE_NAME + file + ".txt", 'w', encoding = 'UTF-8') as write_file: 
+                for tag in tags:
+                    noun = tag['tag']
+                    count = tag['count']
+                    write_file.write('{} {}\n'.format(noun, count))
 
 
 # 인터프리터에서 직접 실행
