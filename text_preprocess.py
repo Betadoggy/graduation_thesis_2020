@@ -20,7 +20,7 @@ print ("file_list_txt: {}".format(file_list))
 
 # 입출력 파일명
 INPUT_FILE_NAME = 'crawled/'
-OUTPUT_FILE_NAME = 'processed/'
+OUTPUT_FILE_NAME = 'processed/prc'
 
 
 # 텍스트 전처리(Preprocess text 함수)
@@ -36,7 +36,7 @@ def main():
         with open(INPUT_FILE_NAME + file, 'r', encoding = 'UTF-8') as read_file: # UTF-8 인코딩
             text = read_file.read()
             text = prp_text(text)
-            with open(OUTPUT_FILE_NAME + file + ".txt", 'w', encoding = 'UTF-8') as write_file: 
+            with open(OUTPUT_FILE_NAME + file.replace("crw", ""), 'w', encoding = 'UTF-8') as write_file: 
                 write_file.write(text)
 
 

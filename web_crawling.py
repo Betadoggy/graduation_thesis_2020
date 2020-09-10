@@ -136,8 +136,8 @@ def get_text(address):
 
 
 # 파일 입출력 함수
-def io_file(address, title):
-    open_output_file = open(OUTPUT_FILE_NAME + title + '.txt', 'w', -1, "utf-8")
+def io_file(address, c_t, l_t, m_t, s_t):
+    open_output_file = open(OUTPUT_FILE_NAME + c_t + l_t + m_t + s_t + '.txt', 'w', -1, "utf-8")
     result_text = get_text(address)
     open_output_file.write(result_text)
     open_output_file.close()
@@ -153,16 +153,18 @@ def main():
         print("\n" + str(index + 2) + "차 교육과정 : " + URL)
 
         # 교육과정 제목 변수
-        crs_title = str(index + 2) + "차 교육과정_"
+        crs_title = str(index + 2) + "차 교육과정"
 
         # 대단원 URL 저장
         URL += '_00' + str(lar[index]) + '0'
 
+        print("\n" + url_req(URL) + " : " + URL)
+
         # URL 요청, 대단원 제목 전처리
-        lar_title = crs_title + url_req(URL)
+        lar_title = url_req(URL)
 
         # 파일 입출력
-        io_file(URL, lar_title)
+        io_file(URL, crs_title + "_", lar_title, "", "")
 
         # 대단원 URL 저장
         URL_set = URL
@@ -173,11 +175,13 @@ def main():
             # 중단원 URL 저장
             URL_set = URL + '_00' + str(mid[index][m_index]) + '0'
 
+            print("\n" + url_req(URL_set) + " : " + URL_set)
+
             # URL 요청, 중단원 제목 전처리
-            mid_title = lar_title + url_req(URL_set)
+            mid_title = url_req(URL_set)
 
             # 파일 입출력
-            io_file(URL_set, mid_title)
+            io_file(URL_set, crs_title + "_", lar_title + "_", mid_title, "")
 
             # 소단원 순회
             for s_index, value in enumerate(sml[index][m_index]):
@@ -189,11 +193,13 @@ def main():
                 # 소단원 URL 저장
                 URL_set_set = URL_set + '_00' + str(sml[index][m_index][s_index]) + '0'
 
+                print("\n" + url_req(URL_set_set) + " : " + URL_set_set)
+
                 # URL 요청, 소단원 제목 전처리
-                sml_title = mid_title + url_req(URL_set_set)
+                sml_title = url_req(URL_set_set)
 
                 # 파일 입출력
-                io_file(URL_set, sml_title)
+                io_file(URL_set_set, crs_title + "_", lar_title + "_", mid_title + "_", sml_title)
 
     
 # 인터프리터에서 메인 함수 실행

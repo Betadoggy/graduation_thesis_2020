@@ -19,9 +19,9 @@ file_list_txt = [file for file in file_list if file.endswith(".txt")]
 
 # 입출력 파일명
 INPUT_FILE_NAME = 'processed/'
-OUTPUT_FILE_NAME = 'stats/'
+OUTPUT_FILE_NAME = 'stats/sts'
 
-
+""" 원본 
 def get_tags(text, ntags=50):
     spliter = Twitter()
     # konlpy의 Twitter객체
@@ -38,25 +38,89 @@ def get_tags(text, ntags=50):
     # 명사와 사용된 갯수를 return_list에 저장합니다.
     return return_list
 
+"""
 
+def get_tags(text, ntags=50):
+    
+    spliter = Twitter()
+    # konlpy의 Twitter객체
+    nouns = spliter.nouns(text)
+    # nouns 함수를 통해서 text에서 명사만 분리/추출
+    count = Counter(nouns)
+    # Counter객체를 생성하고 참조변수 nouns할당
+    return_list = []  # 명사 빈도수 저장할 변수
+    for n, c in count.most_common(ntags):
+        temp = {'tag': n, 'count': c}
+        return_list.append(temp)
+    # most_common 메소드는 정수를 입력받아 객체 안의 명사중 빈도수
+    # 큰 명사부터 순서대로 입력받은 정수 갯수만큼 저장되어있는 객체 반환
+    # 명사와 사용된 갯수를 return_list에 저장합니다.
+    return return_list
+
+
+    # print ("file_list_txt: {}".format(file_list_txt))
+
+""" 원본
 # 메인 함수
 def main():
 
     # 최대 많은 빈도수 부터 20개 명사 추출
     noun_count = 20
-
-    # print ("file_list_txt: {}".format(file_list_txt))
-
     for file in file_list_txt:
         with open(INPUT_FILE_NAME + file, 'r', encoding = 'UTF-8') as read_file: # UTF-8 인코딩
             text = read_file.read() #파일을 읽습니다.
             tags = get_tags(text, noun_count) # get_tags 함수 실행
-            with open(OUTPUT_FILE_NAME + file + ".txt", 'w', encoding = 'UTF-8') as write_file: 
+            with open(OUTPUT_FILE_NAME + file.replace("prc", ""), 'w', encoding = 'UTF-8') as write_file: 
                 for tag in tags:
-                    noun = tag['tag']
-                    count = tag['count']
-                    write_file.write('{} {}\n'.format(noun, count))
 
+                    if len(file.split(sep='_')) == 3: # 대단원 까지
+                        typ, crs, lar = file.replace(".txt", "").split(sep='_') # [문서타입, 교육과정, 대단원]
+                        noun = tag['tag']
+                        count = tag['count']
+                        write_file.write('{} {} {} {} {} {}\n'.format(noun, count, crs, lar, None, None))
+
+                    elif len(file.split(sep='_')) == 4: # 중단원 까지
+                        typ, crs, lar, mid = file.replace(".txt", "").split(sep='_') # [문서타입, 교육과정, 대단원, 중단원]
+                        noun = tag['tag']
+                        count = tag['count']
+                        write_file.write('{} {} {} {} {} {}\n'.format(noun, count, crs, lar, mid, None))
+
+                    elif len(file.split(sep='_')) == 5: # 소단원 까지
+                        typ, crs, lar, mid, sml = file.replace(".txt", "").split(sep='_') # [문서타입, 교육과정, 대단원, 중단원, 소단원]
+                        noun = tag['tag']
+                        count = tag['count']
+                        write_file.write('{} {} {} {} {} {}\n'.format(noun, count, crs, lar, mid, sml))
+
+"""
+# 메인 함수
+def main():
+
+    # 최대 많은 빈도수 부터 20개 명사 추출
+    noun_count = 20
+    for file in file_list_txt:
+
+        with open(INPUT_FILE_NAME + file, 'r', encoding = 'UTF-8') as read_file: # UTF-8 인코딩
+            with open("csv/output.txt", 'a', encoding = 'UTF-8') as write_file: 
+                text = read_file.read() #파일을 읽습니다.
+                tags = get_tags(text, noun_count) # get_tags 함수 실행
+                for tag in tags:
+                    if len(file.split(sep='_')) == 3: # 대단원 까지
+                        typ, crs, lar = file.replace(".txt", "").split(sep='_') # [문서타입, 교육과정, 대단원]
+                        noun = tag['tag']
+                        count = tag['count']
+                        write_file.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(noun, count, crs, lar, None, None))
+
+                    elif len(file.split(sep='_')) == 4: # 중단원 까지
+                        typ, crs, lar, mid = file.replace(".txt", "").split(sep='_') # [문서타입, 교육과정, 대단원, 중단원]
+                        noun = tag['tag']
+                        count = tag['count']
+                        write_file.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(noun, count, crs, lar, mid, None))
+
+                    elif len(file.split(sep='_')) == 5: # 소단원 까지
+                        typ, crs, lar, mid, sml = file.replace(".txt", "").split(sep='_') # [문서타입, 교육과정, 대단원, 중단원, 소단원]
+                        noun = tag['tag']
+                        count = tag['count']
+                        write_file.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(noun, count, crs, lar, mid, sml))
 
 # 인터프리터에서 직접 실행
 if __name__ == '__main__':
